@@ -1,13 +1,13 @@
 import { ThemeType } from "grommet/index";
 
-const COLOR = "#6CCAFF";
+export const MAIN = "#6CCAFF";
 
 export const theme: ThemeType = {
   global: {
     colors: {
       brand: {
-        dark: COLOR,
-        light: COLOR,
+        dark: MAIN,
+        light: MAIN,
       },
       background: {
         dark: "#111111",
@@ -92,6 +92,18 @@ export const theme: ThemeType = {
   button: {
     border: {
       radius: "0px",
+    },
+    size: {
+      small: {
+        border: {
+          radius: "0px",
+        },
+      },
+      large: {
+        border: {
+          radius: "0px",
+        },
+      },
     },
   },
   checkBox: {

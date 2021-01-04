@@ -1,19 +1,20 @@
 import React from "react";
-import { Box, Button, FormField, TextInput } from "grommet/index";
+import { Box, Button } from "grommet/index";
+import { SimulationControl } from "../SimulationControl";
+import Link from "next/link";
 
-interface SimulationSetupParams {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: () => void;
-  running: boolean;
-}
-
-export function SimulationSetup(props: SimulationSetupParams): JSX.Element {
+export function SimulationSetup(): JSX.Element {
   return (
-    <Box background={"black"} flex align="center" justify="center">
-      <FormField label="Speed">
-        <TextInput placeholder="speed" defaultValue={1} />
-      </FormField>
-      <Button primary label={props.running ? "Stop" : "Start"} />
-    </Box>
+    <>
+      <Box direction={"row"} gap={"medium"}>
+        <SimulationControl label={"speed"} defaultValue={0} />
+        <SimulationControl label={"speed"} defaultValue={0} />
+        <SimulationControl label={"speed"} defaultValue={0} />
+        <SimulationControl label={"speed"} defaultValue={0} />
+      </Box>
+      <Link href="loading">
+        <Button primary label={"start the simulation"} size={"large"} />
+      </Link>
+    </>
   );
 }
