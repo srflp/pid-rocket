@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Game of Life</title>
+        <title>PID Rocket</title>
       </Head>
       <div className={styles.container}>
         <Link href="hello">
