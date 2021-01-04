@@ -15,6 +15,12 @@
     "jsx": "preserve",
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "./pages/**/*.ts",
+    "./pages/**/*.tsx",
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }
