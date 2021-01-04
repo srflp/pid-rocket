@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { ReactElement, useState } from "react";
-import { Button } from "grommet/es6";
+import { Button } from "grommet/index";
 
 export default function Hello(): ReactElement {
   const [opened, setOpened] = useState(false);
