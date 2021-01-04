@@ -1,13 +1,14 @@
 import Head from 'next/head';
-import { Box, Button, Footer, Header, Heading, Markdown } from 'grommet/index';
+import { Anchor, Box, Button, Footer, Header, Heading, Markdown } from 'grommet/index';
 import Link from 'next/link';
 import React, { ReactChild } from 'react';
+import { Github } from 'grommet-icons/index';
 
-interface BigBlackViewModel {
+interface BigBlackModel {
   children: ReactChild;
 }
 
-export function BigBlackView(props: BigBlackViewModel): JSX.Element {
+export function BigBlackTemplate(props: BigBlackModel): JSX.Element {
   const { children } = props;
 
   return (
@@ -17,10 +18,18 @@ export function BigBlackView(props: BigBlackViewModel): JSX.Element {
       </Head>
       <Box fill>
         <Header background={'black'} pad={'medium'}>
-          <Heading>PID Rocket</Heading>
-          <Link href="hello">
-            <Button primary label={'Hello'} />
-          </Link>
+          <Heading margin={'none'}>PID Rocket</Heading>
+          <Box direction={'row'} align={'center'} justify={'center'} gap={'medium'}>
+            <Link href="hello">
+              <Button secondary label={'Hello'} />
+            </Link>
+            <Button
+              primary
+              icon={<Github />}
+              href={'https://github.com/srflp/pid-rocket'}
+              label={'GitHub'}
+            />
+          </Box>
         </Header>
         <Box background={'black'} flex align="center" justify="center">
           {children}

@@ -13,6 +13,7 @@
   "dependencies": {
     "grommet": "^2.16.2",
     "grommet-icons": "^4.5.0",
+    "lodash": "^4.17.20",
     "next": "10.0.4",
     "react": "17.0.1",
     "react-dom": "17.0.1",

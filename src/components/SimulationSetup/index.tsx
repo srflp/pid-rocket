@@ -1,9 +1,13 @@
 import React from 'react';
 import { Box, Button } from 'grommet/index';
 import { SimulationControl } from '../SimulationControl';
-import Link from 'next/link';
 
-export function SimulationSetup(): JSX.Element {
+interface SetupModel {
+  onBegin: () => void;
+}
+
+export function SimulationSetup(props: SetupModel): JSX.Element {
+  const { onBegin } = props;
   return (
     <>
       <Box direction={'row'} gap={'medium'}>
@@ -12,9 +16,7 @@ export function SimulationSetup(): JSX.Element {
         <SimulationControl label={'speed'} defaultValue={0} />
         <SimulationControl label={'speed'} defaultValue={0} />
       </Box>
-      <Link href="loading">
-        <Button primary label={'start the simulation'} size={'large'} />
-      </Link>
+      <Button primary label={'start the simulation'} size={'large'} onClick={onBegin} />
     </>
   );
 }
