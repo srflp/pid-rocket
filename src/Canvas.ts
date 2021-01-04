@@ -1,18 +1,19 @@
 class Canvas {
-  set speed(value: number) {
-    this._speed = value;
-  }
   private canvas: HTMLCanvasElement;
+
   private ctx: CanvasRenderingContext2D;
+
   private width: number;
+
   private height: number;
+
   private reqID: number | undefined;
+
   private count = 0;
-  private _speed = 1;
 
   constructor(canvas: HTMLCanvasElement) {
     if (!canvas) {
-      throw "Canvas not found.";
+      throw new Error("Canvas not found.");
     }
     this.canvas = canvas;
     const { width, height } = this.canvas.getBoundingClientRect();
@@ -22,8 +23,14 @@ class Canvas {
     if (canvasContext) {
       this.ctx = canvasContext;
     } else {
-      throw "2d canvas context not supported";
+      throw new Error("2d canvas context not supported");
     }
+  }
+
+  private _speed = 1;
+
+  set speed(value: number) {
+    this._speed = value;
   }
 
   drawContinuously(): void {

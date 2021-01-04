@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { ReactElement, useState } from "react";
+import { Button } from "grommet/es6";
 
-export default function Hello(): JSX.Element {
+export default function Hello(): ReactElement {
   const [opened, setOpened] = useState(false);
   const [clicked, setClicked] = useState(0);
 
@@ -14,8 +15,8 @@ export default function Hello(): JSX.Element {
       <Head>
         <title>Hello</title>
       </Head>
-      <div>{opened + ""}</div>
-      <button onClick={updateClicked}>zmień: {clicked}</button>
+      <div>{`${opened}`}</div>
+      <Button onClick={updateClicked} label={`zmień: ${clicked}`} />
     </>
   );
 }
