@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { Solution } from 'src/Engine';
-import { Line } from '@reactchartjs/react-chart.js';
+import { Line } from 'react-chartjs-2';
 import { round } from 'lodash';
 import { MAIN } from '../../theme';
 import { Box, Button, Collapsible, Layer } from 'grommet';

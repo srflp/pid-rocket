@@ -4,13 +4,13 @@ import { BigBlackTemplate } from '../src/components/BigBlackTemplate';
 import { SimulationLoading } from '../src/components/Loading';
 import { Box } from 'grommet/index';
 import { useStatus } from '../src/hooks';
-import Engine from '../src/Engine';
+import Engine, { Solution } from '../src/Engine';
 import { Presentation } from '../src/components/Presentation';
 
 export default function App(): JSX.Element {
   const { render, goTo } = useStatus();
   const [config, setConfig] = useState<number>(NaN);
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState<Solution>();
 
   useEffect(() => {
     if (isNaN(config)) return;
