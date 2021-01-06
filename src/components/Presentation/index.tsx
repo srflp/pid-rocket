@@ -4,15 +4,16 @@ import { Solution } from 'src/Engine';
 import { Line } from 'react-chartjs-2';
 import { round } from 'lodash';
 import { MAIN } from '../../theme';
-import { Box, Button, Collapsible, Layer } from 'grommet';
-import { FormClose } from 'grommet-icons';
+import { Accordion, AccordionPanel, Box, Button, FormField, TextInput } from 'grommet';
 
 interface PresentationModel {
   data: Solution | undefined;
+  onTweak: Function;
+  config: number;
 }
 
 export function Presentation(props: PresentationModel) {
-  const { data } = props;
+  const { data, onTweak, config } = props;
 
   if (!data) return <h1>Nothing</h1>;
 
@@ -34,7 +35,7 @@ export function Presentation(props: PresentationModel) {
     labels: times.map((el) => round(el, 2)),
     datasets: [
       {
-        label: 'Time',
+        label: 'Height',
         data: poses.map((el) => Math.max(el, 0)).map((el) => round(el, 2)),
         fill: false,
         backgroundColor: 'rgb(255, 99, 132, 0)',
@@ -43,7 +44,7 @@ export function Presentation(props: PresentationModel) {
     ],
   };
 
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [time, setTime] = useState(config + '');
 
   return (
     <>
@@ -51,34 +52,37 @@ export function Presentation(props: PresentationModel) {
         <title>Hello</title>
       </Head>
       <Box fill>
+        <Box background={'black'} justify={'center'} align={'center'}>
+          <Box direction={'row'} gap={'medium'} pad={'medium'}>
+            <FormField label={'simulation time'}>
+              <TextInput
+                placeholder="simulation time"
+                value={time}
+                onChange={(event) => {
+                  setTime(event.target.value);
+                }}
+              />
+            </FormField>
+          </Box>
+          <Button
+            primary
+            label={'restart'}
+            onClick={() => {
+              onTweak(Number(time));
+            }}
+          />
+        </Box>
         <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
           <Box flex align="center" justify="center">
-            <Line data={conf} options={options} type={'line'} height={100} />
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            <Line data={conf} options={options} height={100} />
+            <Accordion fill={'horizontal'}>
+              <AccordionPanel label="Raw solution">
+                <Box pad="medium" fill={'horizontal'}>
+                  <pre>{JSON.stringify(data, null, 2)}</pre>
+                </Box>
+              </AccordionPanel>
+            </Accordion>
           </Box>
-          {!showSidebar ? (
-            <Collapsible direction="horizontal" open={showSidebar}>
-              <Box
-                flex
-                width="medium"
-                background="light-2"
-                elevation="small"
-                align="center"
-                justify="center"
-              >
-                sidebar
-              </Box>
-            </Collapsible>
-          ) : (
-            <Layer>
-              <Box background={'black'} tag="header" justify="end" align="center" direction="row">
-                <Button icon={<FormClose />} onClick={() => setShowSidebar(!showSidebar)} />
-              </Box>
-              <Box fill background={'black'} align="center" justify="center">
-                sidebar
-              </Box>
-            </Layer>
-          )}
         </Box>
       </Box>
     </>

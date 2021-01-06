@@ -14,14 +14,14 @@ export default function App(): JSX.Element {
 
   useEffect(() => {
     if (isNaN(config)) return;
-    setResult(new Engine().generateData());
+    setResult(new Engine(config).generateData());
     setTimeout(() => {
       goTo.present();
     }, 1000);
   }, [config]);
 
-  const begin = () => {
-    setConfig(1);
+  const begin = (config: number) => {
+    setConfig(config);
     goTo.loading();
   };
 
@@ -37,7 +37,7 @@ export default function App(): JSX.Element {
           <SimulationLoading onAbort={goTo.setup} />
         </Box>,
       )}
-      {render.present(<Presentation data={result} />)}
+      {render.present(<Presentation data={result} onTweak={begin} config={config} />)}
     </>
   );
 }
