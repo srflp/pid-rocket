@@ -108,5 +108,5 @@ export default class Engine {
   }
 }
 
-const data = new Engine().generateData();
-console.log(data);
+// const data = new Engine().generateData();
+// console.log(data);
