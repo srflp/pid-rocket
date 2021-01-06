@@ -77,9 +77,7 @@ export default class Engine {
     this.derivativeError = (this.error - this.errorLast) / this.timeStep;
     this.errorLast = this.error;
     this.output =
-      this.kP * this.error +
-      this.kI * this.integralError +
-      this.kD * this.derivativeError;
+      this.kP * this.error + this.kI * this.integralError + this.kD * this.derivativeError;
     if (this.output >= this.maxThrust) {
       this.output = this.maxThrust;
     } else if (this.output <= 0) {
@@ -105,5 +103,5 @@ export default class Engine {
   }
 }
 
-const data = new Engine().generateData();
-console.log(data);
+// const data = new Engine().generateData();
+// console.log(data);
