@@ -28,6 +28,11 @@ class Rocket {
   }
 }
 
+export interface Solution {
+  poses: number[];
+  times: number[];
+}
+
 export default class Engine {
   private timeStep: number;
   private simTime: number;
@@ -77,9 +82,7 @@ export default class Engine {
     this.derivativeError = (this.error - this.errorLast) / this.timeStep;
     this.errorLast = this.error;
     this.output =
-      this.kP * this.error +
-      this.kI * this.integralError +
-      this.kD * this.derivativeError;
+      this.kP * this.error + this.kI * this.integralError + this.kD * this.derivativeError;
     if (this.output >= this.maxThrust) {
       this.output = this.maxThrust;
     } else if (this.output <= 0) {
@@ -89,7 +92,7 @@ export default class Engine {
   }
 
   // cycle
-  generateData() {
+  generateData(): Solution {
     // wykona sie this.simTime/this.timeStep razy
     for (let time = 0; time < this.simTime; time += this.timeStep) {
       time = Number(time.toFixed(3));
