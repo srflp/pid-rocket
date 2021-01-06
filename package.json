@@ -11,6 +11,8 @@
     "postinstall": "next telemetry disable"
   },
   "dependencies": {
+    "@reactchartjs/react-chart.js": "^1.0.0-rc.3",
+    "chart.js": "^2.9.4",
     "grommet": "^2.16.2",
     "grommet-icons": "^4.5.0",
     "lodash": "^4.17.20",
