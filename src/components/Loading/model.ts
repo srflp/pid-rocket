@@ -1,3 +1,3 @@
 export interface LoadingModel {
-  onAbort: Function;
+  onAbort: () => void;
 }

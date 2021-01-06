@@ -5,7 +5,7 @@ import { MAIN } from 'src/theme';
 import { LoadingModel } from './model';
 
 export function SimulationLoading(props: LoadingModel) {
-  const { onAbort, onCompleted } = props;
+  const { onAbort } = props;
 
   return (
     <>

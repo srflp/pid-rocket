@@ -6,7 +6,7 @@ export enum Status {
   PRESENT,
 }
 
-function unhook(hook: Function[]) {
+function unhook(hook: any[]) {
   const [setup, loading, present] = hook;
   return { setup, loading, present };
 }
@@ -21,7 +21,7 @@ export function useStatus(initial = Status.SETUP) {
   };
 }
 
-function useStatusUpdates(set: (status: Status) => void) {
+function useStatusUpdates(set: (status: Status) => void): (() => void)[] {
   const toSetup = () => set(Status.SETUP);
   const toLoading = () => set(Status.LOADING);
   const toPresent = () => set(Status.PRESENT);
