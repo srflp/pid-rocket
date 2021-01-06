@@ -1,25 +1,25 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { Solution } from 'src/Engine';
 import { Line } from 'react-chartjs-2';
 import { round } from 'lodash';
 import { MAIN } from '../../theme';
 import { Accordion, AccordionPanel, Box, Button, FormField, TextInput } from 'grommet';
+import { SimulationOptions, SimulationOutput } from '../../computations/pid/typesAndDefaults';
 
 interface PresentationModel {
-  data: Solution | undefined;
+  data: SimulationOutput | undefined;
   onTweak: Function;
-  config: number;
+  options: SimulationOptions | undefined;
 }
 
 export function Presentation(props: PresentationModel) {
-  const { data, onTweak, config } = props;
+  const { data, onTweak, options } = props;
 
   if (!data) return <h1>Nothing</h1>;
 
   const { poses, times } = data;
 
-  const options = {
+  const chartOptions = {
     scales: {
       yAxes: [
         {
@@ -44,7 +44,7 @@ export function Presentation(props: PresentationModel) {
     ],
   };
 
-  const [time, setTime] = useState(config + '');
+  // const [options, setOptions] = useState(config + '');
 
   return (
     <>
@@ -57,10 +57,10 @@ export function Presentation(props: PresentationModel) {
             <FormField label={'simulation time'}>
               <TextInput
                 placeholder="simulation time"
-                value={time}
-                onChange={(event) => {
-                  setTime(event.target.value);
-                }}
+                // value={time}
+                // onChange={(event) => {
+                //   setTime(event.target.value);
+                // }}
               />
             </FormField>
           </Box>
@@ -68,13 +68,13 @@ export function Presentation(props: PresentationModel) {
             primary
             label={'restart'}
             onClick={() => {
-              onTweak(Number(time));
+              // onTweak(Number(time));
             }}
           />
         </Box>
         <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
           <Box flex align="center" justify="center">
-            <Line data={conf} options={options} height={100} />
+            <Line data={conf} options={chartOptions} height={100} />
             <Accordion fill={'horizontal'}>
               <AccordionPanel label="Raw solution">
                 <Box pad="medium" fill={'horizontal'}>

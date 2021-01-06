@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { SimulationSetup } from '../src/components/SimulationSetup';
 import { BigBlackTemplate } from '../src/components/BigBlackTemplate';
 import { SimulationLoading } from '../src/components/Loading';
-import { Box } from 'grommet/index';
+import { Box } from 'grommet';
 import { useStatus } from '../src/hooks';
-import Engine, { Solution } from '../src/Engine';
+import { SimulationOptions, SimulationOutput } from '../src/computations/pid/typesAndDefaults';
 import { Presentation } from '../src/components/Presentation';
+import Simulation from '../src/computations/pid/Simulation';
 
 export default function App(): JSX.Element {
   const { render, goTo } = useStatus();
-  const [config, setConfig] = useState<number>(NaN);
-  const [result, setResult] = useState<Solution>();
+  const [options, setOptions] = useState<SimulationOptions>();
+  const [result, setResult] = useState<SimulationOutput>();
 
   useEffect(() => {
-    if (isNaN(config)) return;
-    setResult(new Engine(config).generateData());
+    if (options === undefined) return;
+    setResult(new Simulation(options).generateData());
     setTimeout(() => {
       goTo.present();
     }, 1000);
-  }, [config]);
+  }, [options]);
 
-  const begin = (config: number) => {
-    setConfig(config);
+  const begin = (options: SimulationOptions) => {
+    setOptions(options);
     goTo.loading();
   };
 
@@ -37,7 +38,7 @@ export default function App(): JSX.Element {
           <SimulationLoading onAbort={goTo.setup} />
         </Box>,
       )}
-      {render.present(<Presentation data={result} onTweak={begin} config={config} />)}
+      {render.present(<Presentation data={result} onTweak={begin} options={options} />)}
     </>
   );
 }

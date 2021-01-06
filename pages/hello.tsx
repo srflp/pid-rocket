@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import React, { ReactElement, useState } from 'react';
-import Engine from '../src/Engine';
+import Simulation from '../src/computations/pid/Simulation';
+import { defaultOptions } from 'src/computations/pid/typesAndDefaults';
 
 export default function Hello(): ReactElement {
   const [clicked, setClicked] = useState(0);
 
-  const data = new Engine().generateData();
+  const data = new Simulation(defaultOptions).generateData();
 
   return (
     <>
