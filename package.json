@@ -11,6 +11,7 @@
     "postinstall": "next telemetry disable"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.7",
     "grommet": "^2.16.2",
     "grommet-icons": "^4.5.0",
     "lodash": "^4.17.20",
