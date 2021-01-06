@@ -12,6 +12,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <>
       <Head>
         <link rel="shortcut icon" href={`${pathPrefix}/favicon.ico`} />
+        <link
+          rel="stylesheet"
+          href="https://indestructibletype.com/fonts/Jost.css"
+          type="text/css"
+          charSet="utf-8"
+        />
       </Head>
       <Grommet full theme={theme}>
         <Component {...pageProps} />
