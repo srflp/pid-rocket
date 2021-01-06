@@ -21,6 +21,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.167",
     "@types/node": "^14.14.19",
     "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",

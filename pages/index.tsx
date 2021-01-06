@@ -1,34 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SimulationSetup } from '../src/components/SimulationSetup';
 import { BigBlackTemplate } from '../src/components/BigBlackTemplate';
 import { SimulationLoading } from '../src/components/Loading';
 import { Box } from 'grommet/index';
-
-type AppStatus = 'setup' | 'loading' | 'present';
-
-function useStatusUpdates(set: (status: AppStatus) => void) {
-  const toSetup = () => set('setup');
-  const toLoading = () => set('loading');
-  const toPresent = () => set('loading');
-  return [toSetup, toLoading, toPresent];
-}
+import { useStatus } from '../src/hooks';
+import Engine from '../src/Engine';
+import { Presentation } from '../src/components/Presentation';
 
 export default function App(): JSX.Element {
-  const [status, setStatus] = useState<AppStatus>('setup');
-  const [toSetup, toLoading] = useStatusUpdates(setStatus);
+  const { render, goTo } = useStatus();
+  const [config, setConfig] = useState<number>(NaN);
+  const [result, setResult] = useState({});
+
+  useEffect(() => {
+    if (isNaN(config)) return;
+    setResult(new Engine().generateData());
+    setTimeout(() => {
+      goTo.present();
+    }, 1000);
+  }, [config]);
+
+  const begin = () => {
+    setConfig(1);
+    goTo.loading();
+  };
 
   return (
     <>
-      {status === 'setup' && (
+      {render.setup(
         <BigBlackTemplate>
-          <SimulationSetup onBegin={toLoading} />
-        </BigBlackTemplate>
+          <SimulationSetup onBegin={begin} />
+        </BigBlackTemplate>,
       )}
-      {status === 'loading' && (
+      {render.loading(
         <Box background={'black'} fill>
-          <SimulationLoading onAbort={toSetup} />
-        </Box>
+          <SimulationLoading onAbort={goTo.setup} />
+        </Box>,
       )}
+      {render.present(<Presentation data={result} />)}
     </>
   );
 }

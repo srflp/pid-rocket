@@ -5,7 +5,8 @@ import { MAIN } from 'src/theme';
 import { LoadingModel } from './model';
 
 export function SimulationLoading(props: LoadingModel) {
-  const { onAbort } = props;
+  const { onAbort, onCompleted } = props;
+
   return (
     <>
       <Box flex align="center" justify="center">
