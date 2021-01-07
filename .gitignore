@@ -38,3 +38,4 @@ yarn-error.log*
 .vscode/
 
 yarn.lock
+pnpm-lock.yaml
