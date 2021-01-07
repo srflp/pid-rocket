@@ -14,11 +14,11 @@ export interface SimulationOptions {
 }
 
 export const defaultOptions = {
-  timeStep: 0.002,
-  simTime: 1,
+  timeStep: 0.001,
+  simTime: 0.1,
   maxThrust: 15,
   destination: 10,
-  kP: 0.25,
+  kP: 0.36,
   kI: 40.0,
   kD: 0.0008099999999999997,
 };
