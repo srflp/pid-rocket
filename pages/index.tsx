@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SimulationSetup } from '../src/components/SimulationSetup';
+import { SimulationSetup } from '../src/components/Setup';
 import { BigBlackTemplate } from '../src/components/BigBlackTemplate';
 import { SimulationLoading } from '../src/components/Loading';
 import { Box } from 'grommet';
