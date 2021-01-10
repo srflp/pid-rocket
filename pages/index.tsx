@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { round } from 'lodash';
 import React, { useState } from 'react';
 import styles from 'styles/Index.module.scss';
 import HeightChart from '../src/components/HeightChart';
@@ -35,7 +35,7 @@ export default function Index(): JSX.Element {
                     {Array.from(Array(result.count).keys()).map((i) => (
                       <tr>
                         <td>{result.times[i]}</td>
-                        <td>{_.round(result.poses[i], 2)}</td>
+                        <td>{round(result.poses[i], 2)}</td>
                       </tr>
                     ))}
                   </table>

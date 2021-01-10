@@ -8,7 +8,7 @@ export default class Rocket {
   constructor() {
     this.acceleration = 0;
     this.velocity = 0;
-    this.y = -100;
+    this.y = 0;
   }
 
   updateProperties(thrust: number) {
