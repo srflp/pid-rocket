@@ -11,18 +11,18 @@ export default class Simulation {
   generateData(): SimulationOutput {
     const { simTime, timeStep } = this.options;
     const data = {
-      count: simTime / timeStep,
+      count: Math.floor(simTime / timeStep),
       poses: [] as number[],
       times: [] as number[],
     };
-    for (let time = 0; time < simTime; time += timeStep) {
-      // this is being executed simTime/timeStep times
-      time = Number(time.toFixed(3));
+    let currentTime = 0;
+    for (let i = 0; i < data.count; i += 1) {
+      currentTime += timeStep;
       const thrust = this.rocketPID.calculateThrust(this.rocket.getY());
       this.rocket.updateProperties(thrust);
       // TODO end if the rocket exceeds some boundary height
       data.poses.push(this.rocket.getY());
-      data.times.push(time);
+      data.times.push(currentTime);
     }
     return data;
   }

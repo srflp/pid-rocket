@@ -22,7 +22,7 @@ interface Props {
 
 export default function HeightChart({ data }: Props): JSX.Element {
   const conf = {
-    labels: data?.times,
+    labels: data?.times.map((el) => round(el, 3)),
     datasets: [
       {
         label: 'Height',

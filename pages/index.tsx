@@ -33,12 +33,14 @@ export default function Index(): JSX.Element {
                   <p>Punktów: {result.count}</p>
                   <table>
                     <tr>
+                      <th>n</th>
                       <th>times</th>
                       <th>poses</th>
                     </tr>
                     {Array.from(Array(result.count).keys()).map((i) => (
                       <tr>
-                        <td>{result.times[i]}</td>
+                        <td>{i + 1}</td>
+                        <td>{round(result.times[i], 3)}</td>
                         <td>{round(result.poses[i], 2)}</td>
                       </tr>
                     ))}
