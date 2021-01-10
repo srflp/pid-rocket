@@ -74,3 +74,16 @@ $breakpoints: (
   margin-left: 16px;
   font-size: 16pt;
 }
+
+.resultsTable td,
+.resultsTable th {
+  padding: 0 5px;
+}
+
+.resultsTable tr {
+  text-align: right;
+}
+
+.resultsTable tr:first-child {
+  text-align: center;
+}

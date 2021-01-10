@@ -31,17 +31,17 @@ export default function Index(): JSX.Element {
                 <HeightChart data={result} />
                 <div>
                   <p>Punktów: {result.count}</p>
-                  <table>
+                  <table className={styles.resultsTable}>
                     <tr>
                       <th>n</th>
-                      <th>times</th>
-                      <th>poses</th>
+                      <th>time [s]</th>
+                      <th>height [m]</th>
                     </tr>
                     {Array.from(Array(result.count).keys()).map((i) => (
                       <tr>
                         <td>{i + 1}</td>
-                        <td>{round(result.times[i], 3)}</td>
-                        <td>{round(result.poses[i], 2)}</td>
+                        <td>{round(result.times[i], 3).toFixed(3)}</td>
+                        <td>{round(result.poses[i], 2).toFixed(2)}</td>
                       </tr>
                     ))}
                   </table>
