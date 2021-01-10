@@ -10,16 +10,22 @@ export default class Simulation {
 
   generateData(): SimulationOutput {
     const { simTime, timeStep } = this.options;
-    const data = {
+    const data: SimulationOutput = {
       count: Math.floor(simTime / timeStep) + 1,
-      poses: [] as number[],
-      times: [] as number[],
+      time: [],
+      height: [],
+      velocity: [],
+      acceleration: [],
+      thrust: [],
     };
     let currentTime = 0;
 
     // add initial data point
-    data.poses.push(this.rocket.getY());
-    data.times.push(currentTime);
+    data.time.push(currentTime);
+    data.height.push(this.rocket.getY());
+    data.velocity.push(this.rocket.getVelocity());
+    data.acceleration.push(this.rocket.getAcceleration());
+    data.thrust.push(0);
 
     // generate all data points
     for (let i = 1; i < data.count; i += 1) {
@@ -27,8 +33,11 @@ export default class Simulation {
       const thrust = this.rocketPID.calculateThrust(this.rocket.getY());
       this.rocket.updateProperties(thrust);
       // TODO end if the rocket exceeds some boundary height
-      data.poses.push(this.rocket.getY());
-      data.times.push(currentTime);
+      data.time.push(currentTime);
+      data.height.push(this.rocket.getY());
+      data.velocity.push(this.rocket.getVelocity());
+      data.acceleration.push(this.rocket.getAcceleration());
+      data.thrust.push(thrust);
     }
     return data;
   }

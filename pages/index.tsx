@@ -32,8 +32,29 @@ export default function Index(): JSX.Element {
                   title="Rocket height in time - h(t)"
                   labelX="t [s]"
                   labelY="h [m]"
-                  dataX={result.times.map((el) => round(el, 3))}
-                  dataY={result.poses.map((el) => round(el, 2))}
+                  dataX={result.time.map((el) => round(el, 3))}
+                  dataY={result.height.map((el) => round(el, 2))}
+                />
+                <Chart
+                  title="Rocket velocity in time - v(t)"
+                  labelX="t [s]"
+                  labelY="v [m/s]"
+                  dataX={result.time.map((el) => round(el, 3))}
+                  dataY={result.velocity.map((el) => round(el, 2))}
+                />
+                <Chart
+                  title="Rocket acceleration in time - a(t)"
+                  labelX="t [s]"
+                  labelY="a [m/s2]"
+                  dataX={result.time.map((el) => round(el, 3))}
+                  dataY={result.acceleration.map((el) => round(el, 2))}
+                />
+                <Chart
+                  title="Rocket thrust in time - F(t)"
+                  labelX="t [s]"
+                  labelY="F [N]"
+                  dataX={result.time.map((el) => round(el, 3))}
+                  dataY={result.thrust.map((el) => round(el, 2))}
                 />
                 <div>
                   <table className={styles.resultsTable}>
@@ -41,12 +62,18 @@ export default function Index(): JSX.Element {
                       <th>n</th>
                       <th>time [s]</th>
                       <th>height [m]</th>
+                      <th>velocity [m/s]</th>
+                      <th>acceleration [m/s2]</th>
+                      <th>thrust [N]</th>
                     </tr>
                     {Array.from(Array(result.count).keys()).map((i) => (
                       <tr>
                         <td>{i}</td>
-                        <td>{round(result.times[i], 3).toFixed(3)}</td>
-                        <td>{round(result.poses[i], 2).toFixed(2)}</td>
+                        <td>{round(result.time[i], 3).toFixed(3)}</td>
+                        <td>{round(result.height[i], 2).toFixed(2)}</td>
+                        <td>{round(result.velocity[i], 2).toFixed(2)}</td>
+                        <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
+                        <td>{round(result.thrust[i], 2).toFixed(2)}</td>
                       </tr>
                     ))}
                   </table>

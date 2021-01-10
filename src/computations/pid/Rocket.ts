@@ -20,4 +20,12 @@ export default class Rocket {
   getY() {
     return this.y;
   }
+
+  getVelocity() {
+    return this.velocity;
+  }
+
+  getAcceleration() {
+    return this.acceleration;
+  }
 }

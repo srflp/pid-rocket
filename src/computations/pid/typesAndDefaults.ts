@@ -1,7 +1,10 @@
 export interface SimulationOutput {
   count: number;
-  poses: number[];
-  times: number[];
+  time: number[];
+  height: number[];
+  velocity: number[];
+  acceleration: number[];
+  thrust: number[];
 }
 
 export interface SimulationOptions {
