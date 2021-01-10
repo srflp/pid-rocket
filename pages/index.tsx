@@ -22,12 +22,12 @@ export default function Index(): JSX.Element {
           <h2>Simulation parameters</h2>
           <ParametersForm setResult={setResult} />
         </section>
-        <div className={styles.boxWhite}>
-          <section>
-            {!result ? (
-              <p>uzupełnij parametry po lewej!</p>
-            ) : (
-              <>
+        <section className={styles.boxWhite}>
+          {!result ? (
+            <p>uzupełnij parametry po lewej!</p>
+          ) : (
+            <>
+              <div className={styles.chartContainer}>
                 <Chart
                   title="Rocket height in time - h(t)"
                   labelX="t [s]"
@@ -56,35 +56,37 @@ export default function Index(): JSX.Element {
                   dataX={result.time.map((el) => round(el, 3))}
                   dataY={result.thrust.map((el) => round(el, 2))}
                 />
-                <div>
-                  <table className={styles.resultsTable}>
+              </div>
+
+              <div>
+                <table className={styles.resultsTable}>
+                  <tr>
+                    <th>n</th>
+                    <th>time [s]</th>
+                    <th>height [m]</th>
+                    <th>velocity [m/s]</th>
+                    <th>acceleration [m/s2]</th>
+                    <th>thrust [N]</th>
+                  </tr>
+                  {Array.from(Array(result.count).keys()).map((i) => (
                     <tr>
-                      <th>n</th>
-                      <th>time [s]</th>
-                      <th>height [m]</th>
-                      <th>velocity [m/s]</th>
-                      <th>acceleration [m/s2]</th>
-                      <th>thrust [N]</th>
+                      <td>{i}</td>
+                      <td>{round(result.time[i], 3).toFixed(3)}</td>
+                      <td>{round(result.height[i], 2).toFixed(2)}</td>
+                      <td>{round(result.velocity[i], 2).toFixed(2)}</td>
+                      <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
+                      <td>{round(result.thrust[i], 2).toFixed(2)}</td>
                     </tr>
-                    {Array.from(Array(result.count).keys()).map((i) => (
-                      <tr>
-                        <td>{i}</td>
-                        <td>{round(result.time[i], 3).toFixed(3)}</td>
-                        <td>{round(result.height[i], 2).toFixed(2)}</td>
-                        <td>{round(result.velocity[i], 2).toFixed(2)}</td>
-                        <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
-                        <td>{round(result.thrust[i], 2).toFixed(2)}</td>
-                      </tr>
-                    ))}
-                  </table>
-                </div>
-              </>
-            )}
-          </section>
-          <section className={styles.copyright}>
-            Copyright © 2021 Filip Sauer, Karina Szubert, Konrad Szychowiak, Monika Zielińska
-          </section>
-        </div>
+                  ))}
+                </table>
+              </div>
+            </>
+          )}
+        </section>
+        <section className={styles.copyright}>
+          &copy; {new Date().getFullYear()} Filip Sauer, Karina Szubert, Konrad Szychowiak, Monika
+          Zielińska
+        </section>
       </main>
     </>
   );

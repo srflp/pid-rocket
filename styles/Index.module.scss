@@ -11,7 +11,7 @@ $breakpoints: (
 
 .wrapper {
   display: grid;
-  grid-template-columns: minmax(500px, min-content) auto;
+  grid-template-columns: 400px auto;
   grid-template-rows: 60px;
   box-sizing: border-box;
   width: 100%;
@@ -35,7 +35,7 @@ $breakpoints: (
   background-color: #111;
   color: #eaeaea;
   box-sizing: border-box;
-  padding: 40px 35px;
+  padding: 20px 35px;
   overflow: auto;
 }
 
@@ -93,4 +93,17 @@ $breakpoints: (
 
 .resultsTable tr:first-child {
   text-align: center;
+}
+
+.chartContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chartContainer div {
+  width: 50%;
+
+  @media only screen and (max-width: map-get($breakpoints, 'xl')) {
+    width: 100%;
+  }
 }
