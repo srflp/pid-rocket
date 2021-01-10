@@ -1,4 +1,5 @@
 export interface SimulationOutput {
+  count: number;
   poses: number[];
   times: number[];
 }

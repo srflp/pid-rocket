@@ -38,7 +38,6 @@ export default function HeightChart({ data }: Props): JSX.Element {
   return (
     <>
       <Line data={conf} options={chartOptions} height={100} />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
     </>
   );
 }

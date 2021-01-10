@@ -1,21 +1,17 @@
 import Rocket from './Rocket';
 import RocketPID from './RocketPID';
-import { SimulationOptions } from './typesAndDefaults';
+import { SimulationOptions, SimulationOutput } from './typesAndDefaults';
 
 export default class Simulation {
-  private readonly options: SimulationOptions;
-  private rocket: Rocket;
-  private rocketPID: RocketPID;
+  private readonly rocket = new Rocket();
+  private readonly rocketPID = new RocketPID(this.options);
 
-  constructor(options: SimulationOptions) {
-    this.options = options;
-    this.rocket = new Rocket();
-    this.rocketPID = new RocketPID(options);
-  }
+  constructor(private readonly options: SimulationOptions) {}
 
-  generateData() {
+  generateData(): SimulationOutput {
     const { simTime, timeStep } = this.options;
     const data = {
+      count: simTime / timeStep,
       poses: [] as number[],
       times: [] as number[],
     };
