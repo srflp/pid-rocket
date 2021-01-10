@@ -35,18 +35,19 @@ $breakpoints: (
   background-color: #111;
   color: #eaeaea;
   box-sizing: border-box;
-  overflow: auto;
   padding: 40px 35px;
+  overflow: auto;
 }
 
 .boxWhite {
+  grid-area: boxWhite;
   display: flex;
   flex-direction: column;
   //justify-content: center;
   align-content: center;
-  //overflow: hidden;
   background: #fff;
-  grid-area: boxWhite;
+  overflow: auto;
+  min-width: 0;
 }
 
 .copyright {
