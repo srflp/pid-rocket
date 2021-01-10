@@ -4,12 +4,16 @@ import styles from 'styles/Index.module.scss';
 import HeightChart from '../src/components/HeightChart';
 import ParametersForm from '../src/components/ParametersForm';
 import { SimulationOutput } from '../src/computations/pid/typesAndDefaults';
+import Head from 'next/head';
 
 export default function Index(): JSX.Element {
   const [result, setResult] = useState<SimulationOutput>();
 
   return (
     <>
+      <Head>
+        <title>PID Rocket</title>
+      </Head>
       <main className={styles.wrapper}>
         <header className={styles.header}>
           <h1 className={styles.headerTitle}>PID Rocket</h1>
