@@ -1,10 +1,10 @@
 import { round } from 'lodash';
 import React, { useState } from 'react';
-import styles from 'styles/Index.module.scss';
-import HeightChart from '../src/components/HeightChart';
-import ParametersForm from '../src/components/ParametersForm';
-import { SimulationOutput } from '../src/computations/pid/typesAndDefaults';
 import Head from 'next/head';
+import styles from 'styles/Index.module.scss';
+import { SimulationOutput } from '../src/computations/pid/typesAndDefaults';
+import ParametersForm from '../src/components/ParametersForm';
+import Chart from '../src/components/Chart';
 
 export default function Index(): JSX.Element {
   const [result, setResult] = useState<SimulationOutput>();
@@ -28,7 +28,13 @@ export default function Index(): JSX.Element {
               <p>uzupełnij parametry po lewej!</p>
             ) : (
               <>
-                <HeightChart data={result} />
+                <Chart
+                  title="Rocket height in time - h(t)"
+                  labelX="t [s]"
+                  labelY="h [m]"
+                  dataX={result.times.map((el) => round(el, 3))}
+                  dataY={result.poses.map((el) => round(el, 2))}
+                />
                 <div>
                   <table className={styles.resultsTable}>
                     <tr>
