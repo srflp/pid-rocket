@@ -25,16 +25,18 @@ const schema = yup
   .required();
 
 interface Props {
+  setOptions: React.Dispatch<React.SetStateAction<SimulationOptions | undefined>>;
   setResult: React.Dispatch<React.SetStateAction<SimulationOutput | undefined>>;
 }
 
-export default function ParametersForm({ setResult }: Props): JSX.Element {
+export default function ParametersForm({ setOptions, setResult }: Props): JSX.Element {
   const { register, setValue, handleSubmit, errors } = useForm<SimulationOptions>({
     defaultValues: defaultOptions,
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (options: SimulationOptions) => {
+    setOptions(options);
     setResult(new Simulation(options).generateData());
   };
 

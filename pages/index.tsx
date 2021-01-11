@@ -2,12 +2,28 @@ import { round } from 'lodash';
 import React, { useState } from 'react';
 import Head from 'next/head';
 import styles from 'styles/Index.module.scss';
-import { SimulationOutput } from '../src/computations/pid/typesAndDefaults';
+import { SimulationOptions, SimulationOutput } from '../src/computations/pid/typesAndDefaults';
 import ParametersForm from '../src/components/ParametersForm';
 import Chart from '../src/components/Chart';
 
+function getStabilityTime(result: SimulationOutput, destination: number) {
+  let counter = 0;
+  for (let [i, height] of result.height.entries()) {
+    if (counter === 10) {
+      return round(result.time[i - 10], 3).toFixed(3) + ' s';
+    }
+    if (round(height, 2) === destination) {
+      counter += 1;
+    } else {
+      counter = 0;
+    }
+  }
+  return 'stability not achieved during the simulation time';
+}
+
 export default function Index(): JSX.Element {
   const [result, setResult] = useState<SimulationOutput>();
+  const [options, setOptions] = useState<SimulationOptions>();
 
   return (
     <>
@@ -20,10 +36,10 @@ export default function Index(): JSX.Element {
         </header>
         <section className={styles.boxBlack}>
           <h2>Simulation parameters</h2>
-          <ParametersForm setResult={setResult} />
+          <ParametersForm setResult={setResult} setOptions={setOptions} />
         </section>
         <section className={styles.boxWhite}>
-          {!result ? (
+          {!result || !options ? (
             <p>uzupełnij parametry po lewej!</p>
           ) : (
             <>
@@ -59,6 +75,19 @@ export default function Index(): JSX.Element {
               </div>
 
               <div>
+                <p style={{ marginLeft: '15px' }}>
+                  Max height achieved: {round(Math.max(...result.height), 2).toFixed(2) + ' m'}{' '}
+                  (should be: {round(options.destination, 2).toFixed(2) + ' m'})
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15px' }}>
+                  Time to rocket stability on destination height*:{' '}
+                  {getStabilityTime(result, options.destination)}
+                  <span style={{ fontSize: '11px', lineHeight: 'normal' }}>
+                    *time after which next 10 height measurements are equal to the destination
+                    height
+                  </span>
+                </div>
+
                 <table className={styles.resultsTable}>
                   <tr>
                     <th>n</th>
