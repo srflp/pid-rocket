@@ -25,7 +25,7 @@ const schema = yup
   .required();
 
 interface Props {
-  setOptions: React.Dispatch<React.SetStateAction<SimulationOptions | undefined>>;
+  setOptions: React.Dispatch<React.SetStateAction<SimulationOptions>>;
   setResult: React.Dispatch<React.SetStateAction<SimulationOutput | undefined>>;
 }
 

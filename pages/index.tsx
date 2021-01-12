@@ -1,10 +1,15 @@
 import { round } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from 'styles/Index.module.scss';
-import { SimulationOptions, SimulationOutput } from '../src/computations/pid/typesAndDefaults';
+import {
+  defaultOptions,
+  SimulationOptions,
+  SimulationOutput,
+} from '../src/computations/pid/typesAndDefaults';
 import ParametersForm from '../src/components/ParametersForm';
 import Chart from '../src/components/Chart';
+import Simulation from '../src/computations/pid/Simulation';
 
 function getStabilityTime(result: SimulationOutput, destination: number) {
   let counter = 0;
@@ -23,7 +28,11 @@ function getStabilityTime(result: SimulationOutput, destination: number) {
 
 export default function Index(): JSX.Element {
   const [result, setResult] = useState<SimulationOutput>();
-  const [options, setOptions] = useState<SimulationOptions>();
+  const [options, setOptions] = useState<SimulationOptions>(defaultOptions);
+
+  useEffect(() => {
+    setResult(new Simulation(options).generateData());
+  }, []);
 
   return (
     <>
@@ -39,9 +48,7 @@ export default function Index(): JSX.Element {
           <ParametersForm setResult={setResult} setOptions={setOptions} />
         </section>
         <section className={styles.boxWhite}>
-          {!result || !options ? (
-            <p>uzupełnij parametry po lewej!</p>
-          ) : (
+          {result && options ? (
             <>
               <div className={styles.chartContainer}>
                 <Chart
@@ -110,7 +117,7 @@ export default function Index(): JSX.Element {
                 </table>
               </div>
             </>
-          )}
+          ) : null}
         </section>
         <section className={styles.copyright}>
           &copy; {new Date().getFullYear()} Filip Sauer, Karina Szubert, Konrad Szychowiak, Monika
