@@ -90,6 +90,7 @@ export const theme: ThemeType = {
   },
   meter: {},
   button: {
+    color: '#FFFFFF',
     border: {
       radius: '0px',
     },
