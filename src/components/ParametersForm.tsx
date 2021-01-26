@@ -74,7 +74,7 @@ export default function ParametersForm({ setOptions, setResult }: Props): JSX.El
         <TextInput name="destination" placeholder="[m]" ref={register} />
       </FormField>
       <div className={styles.horizontalFlex}>
-        <Button secondary label="back to defaults" onClick={onReset} />
+        <Button secondary style={{ color: '#eaeaea' }} label="back to defaults" onClick={onReset} />
         <Button type="submit" primary label="run 🚀" />
       </div>
     </form>
