@@ -22,9 +22,9 @@ export const defaultOptions = {
   simTime: 100,
   maxThrust: 15,
   destination: 110,
-  kP: 0.21,
-  kI: 0.017,
-  kD: 0.6626,
+  kP: 0.335,
+  kI: 0.018853,
+  kD: 0.79,
 };
 
 // original ones

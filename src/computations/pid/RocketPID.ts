@@ -18,6 +18,7 @@ export default class RocketPID {
     // człon całkujący
     this.integralError += error * timeStep;
 
+    // człon różniczkujący
     const derivativeError = (error - this.errorLast) / timeStep;
     this.errorLast = error;
 
