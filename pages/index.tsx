@@ -14,7 +14,7 @@ function getStabilityTime(result: SimulationOutput, destination: number) {
   let counter = 0;
   for (let [i, height] of result.height.entries()) {
     if (counter === 10) {
-      return round(result.time[i - 10], 3).toFixed(3) + ' s';
+      return round(result.time[i - 10], 2).toFixed(2) + ' s';
     }
     if (round(height, 2) === destination) {
       counter += 1;
@@ -105,7 +105,7 @@ export default function Index(): JSX.Element {
                     {Array.from(Array(result.count).keys()).map((i) => (
                       <tr key={result.time[i]}>
                         <td>{i}</td>
-                        <td>{round(result.time[i], 3).toFixed(3)}</td>
+                        <td>{round(result.time[i], 2).toFixed(2)}</td>
                         <td>{round(result.height[i], 2).toFixed(2)}</td>
                         <td>{round(result.velocity[i], 2).toFixed(2)}</td>
                         <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
