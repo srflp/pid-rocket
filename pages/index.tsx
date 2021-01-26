@@ -91,24 +91,28 @@ export default function Index(): JSX.Element {
                 </div>
 
                 <table className={styles.resultsTable}>
-                  <tr>
-                    <th>n</th>
-                    <th>time [s]</th>
-                    <th>height [m]</th>
-                    <th>velocity [m/s]</th>
-                    <th>acceleration [m/s2]</th>
-                    <th>thrust [N]</th>
-                  </tr>
-                  {Array.from(Array(result.count).keys()).map((i) => (
+                  <thead>
                     <tr>
-                      <td>{i}</td>
-                      <td>{round(result.time[i], 3).toFixed(3)}</td>
-                      <td>{round(result.height[i], 2).toFixed(2)}</td>
-                      <td>{round(result.velocity[i], 2).toFixed(2)}</td>
-                      <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
-                      <td>{round(result.thrust[i], 2).toFixed(2)}</td>
+                      <th>n</th>
+                      <th>time [s]</th>
+                      <th>height [m]</th>
+                      <th>velocity [m/s]</th>
+                      <th>acceleration [m/s2]</th>
+                      <th>thrust [N]</th>
                     </tr>
-                  ))}
+                  </thead>
+                  <tbody>
+                    {Array.from(Array(result.count).keys()).map((i) => (
+                      <tr key={result.time[i]}>
+                        <td>{i}</td>
+                        <td>{round(result.time[i], 3).toFixed(3)}</td>
+                        <td>{round(result.height[i], 2).toFixed(2)}</td>
+                        <td>{round(result.velocity[i], 2).toFixed(2)}</td>
+                        <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
+                        <td>{round(result.thrust[i], 2).toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </table>
               </div>
             </>
