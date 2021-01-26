@@ -33,7 +33,7 @@ export default class Simulation {
       // oblicza siłę ciągu co krok czasu
       const thrust = this.rocketPID.calculateThrust(this.rocket.getY());
       // aktualizuje dane rakiety na podstawie siły ciągu (wysokość, prędkość, przyśpieszenie)
-      this.rocket.updateProperties(thrust);
+      this.rocket.updateProperties(thrust, timeStep);
       // TODO end if the rocket exceeds some boundary height
       data.time.push(currentTime);
       data.height.push(this.rocket.getY());

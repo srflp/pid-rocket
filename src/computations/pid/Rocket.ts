@@ -11,10 +11,10 @@ export default class Rocket {
     this.y = 0;
   }
 
-  updateProperties(thrust: number) {
+  updateProperties(thrust: number, timeStep: number) {
     this.acceleration = thrust / this.mass - this.gravity;
-    this.velocity += this.acceleration;
-    this.y += this.velocity;
+    this.velocity += this.acceleration * timeStep;
+    this.y += this.velocity * timeStep;
   }
 
   getY() {
