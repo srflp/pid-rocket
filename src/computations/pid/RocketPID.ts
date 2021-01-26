@@ -12,12 +12,18 @@ export default class RocketPID {
   calculateThrust(y: number) {
     const { timeStep, destination, maxThrust, kP, kI, kD } = this.options;
 
+    // uchyb regulacji/sterowania
     const error = destination - y;
+
+    // człon całkujący
     this.integralError += error * timeStep;
+
     const derivativeError = (error - this.errorLast) / timeStep;
     this.errorLast = error;
 
     let thrust = kP * error + kI * this.integralError + kD * derivativeError;
+
+    // ograniczanie siły ciągu
     if (thrust >= maxThrust) {
       thrust = maxThrust;
     } else if (thrust <= 0) {

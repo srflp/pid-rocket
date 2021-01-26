@@ -2,7 +2,7 @@ export default class Rocket {
   private velocity: number;
   private acceleration: number;
   private y: number;
-  private gravity: number = -9.81;
+  private gravity: number = 9.81;
   private mass: number = 1;
 
   constructor() {
@@ -12,7 +12,7 @@ export default class Rocket {
   }
 
   updateProperties(thrust: number) {
-    this.acceleration = this.gravity + thrust / this.mass;
+    this.acceleration = thrust / this.mass - this.gravity;
     this.velocity += this.acceleration;
     this.y += this.velocity;
   }
