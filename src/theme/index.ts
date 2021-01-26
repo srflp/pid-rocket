@@ -90,7 +90,9 @@ export const theme: ThemeType = {
   },
   meter: {},
   button: {
-    color: '#FFFFFF',
+    secondary: {
+      color: '#eaeaea',
+    },
     border: {
       radius: '0px',
     },
