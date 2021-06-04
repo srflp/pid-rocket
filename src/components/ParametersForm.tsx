@@ -1,15 +1,25 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { styled } from 'stitches.config';
+import * as yup from 'yup';
+import Simulation from '../computations/pid/Simulation';
 import {
   defaultOptions,
   SimulationOptions,
   SimulationOutput,
 } from '../computations/pid/typesAndDefaults';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Simulation from '../computations/pid/Simulation';
-import * as yup from 'yup';
-import { Button, FormField, TextInput } from 'grommet';
-import styles from './ParametersForm.module.scss';
+import Button from './Button';
+import Flex from './Flex';
+import { FormControl } from './FormControl';
+import { FormLabel } from './FormLabel';
+import { Input } from './Input';
+
+const StyledForm = styled('form', {
+  display: 'flex',
+  gap: '8px',
+  'flex-direction': 'column',
+});
 
 const schema = yup
   .object()
@@ -30,7 +40,7 @@ interface Props {
 }
 
 export default function ParametersForm({ setOptions, setResult }: Props): JSX.Element {
-  const { register, setValue, handleSubmit, errors } = useForm<SimulationOptions>({
+  const { register, setValue, handleSubmit } = useForm<SimulationOptions>({
     defaultValues: defaultOptions,
     resolver: yupResolver(schema),
   });
@@ -47,36 +57,48 @@ export default function ParametersForm({ setOptions, setResult }: Props): JSX.El
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.horizontalFlex}>
-        <FormField label="kP">
-          <TextInput name="kP" placeholder="kP" ref={register} />
-        </FormField>
-        <FormField label="kI">
-          <TextInput name="kI" placeholder="kI" ref={register} />
-        </FormField>
-        <FormField label="kD">
-          <TextInput name="kD" placeholder="kD" ref={register} />
-        </FormField>
-      </div>
-      <div className={styles.horizontalFlex}>
-        <FormField label="time step">
-          <TextInput name="timeStep" placeholder="[s]" ref={register} />
-        </FormField>
-        <FormField label="simulation time">
-          <TextInput name="simTime" placeholder="[s]" ref={register} />
-        </FormField>
-      </div>
-      <FormField label="max thrust">
-        <TextInput name="maxThrust" placeholder="[N]" ref={register} />
-      </FormField>
-      <FormField label="destination height">
-        <TextInput name="destination" placeholder="[m]" ref={register} />
-      </FormField>
-      <div className={styles.horizontalFlex}>
-        <Button secondary style={{ color: '#eaeaea' }} label="back to defaults" onClick={onReset} />
-        <Button type="submit" primary label="run 🚀" />
-      </div>
-    </form>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <Flex css={{ gap: '10px' }}>
+        <FormControl id="kP" isRequired>
+          <FormLabel>kP</FormLabel>
+          <Input type="text" name="kP" placeholder="kP" ref={register} />
+        </FormControl>
+        <FormControl id="kI" isRequired>
+          <FormLabel>kI</FormLabel>
+          <Input type="text" name="kI" placeholder="kI" ref={register} />
+        </FormControl>
+        <FormControl id="kD" isRequired>
+          <FormLabel>kP</FormLabel>
+          <Input type="text" name="kD" placeholder="kD" ref={register} />
+        </FormControl>
+      </Flex>
+      <Flex css={{ gap: '10px' }}>
+        <FormControl id="timeStep" isRequired>
+          <FormLabel>time step</FormLabel>
+          <Input type="text" name="timeStep" placeholder="[s]" ref={register} />
+        </FormControl>
+        <FormControl id="simTime" isRequired>
+          <FormLabel>simulation time</FormLabel>
+          <Input type="text" name="simTime" placeholder="[s]" ref={register} />
+        </FormControl>
+      </Flex>
+      <FormControl id="maxThrust" isRequired>
+        <FormLabel>max thrust</FormLabel>
+        <Input type="text" name="maxThrust" placeholder="[N]" ref={register} />
+      </FormControl>
+      <FormControl id="destination" isRequired>
+        <FormLabel>destination height</FormLabel>
+        <Input type="text" name="destination" placeholder="[m]" ref={register} />
+      </FormControl>
+
+      <Flex css={{ gap: '10px', marginTop: '8px' }}>
+        <Button type="button" onClick={onReset}>
+          back to defaults
+        </Button>
+        <Button type="submit" variant="primary">
+          run 🚀
+        </Button>
+      </Flex>
+    </StyledForm>
   );
 }

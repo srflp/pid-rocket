@@ -1,9 +1,0 @@
-.horizontalFlex {
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  gap: 10px;
-  & > * {
-    width: 100%;
-  }
-}
