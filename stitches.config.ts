@@ -1,9 +1,10 @@
 import { createCss, StitchesCss } from '@stitches/react';
 
+const minWidth = (width: string) => `(min-width: ${width})`;
 const stitches = createCss({
   theme: {
     colors: {
-      main: "#6CCAFF",
+      main: '#6CCAFF',
       gray100: 'hsl(0 0% 98.8%)',
       gray200: 'hsl(0 0% 96.0%)',
       gray300: 'hsl(0 0% 93.7%)',
@@ -15,6 +16,13 @@ const stitches = createCss({
       gray900: 'hsl(0 0% 43.9%)',
       gray1000: 'hsl(0 0% 7%)',
     },
+  },
+  media: {
+    sm: minWidth('640px'),
+    md: minWidth('768px'),
+    lg: minWidth('1024px'),
+    xl: minWidth('1280px'),
+    '2xl': minWidth('1536px'),
   },
   utils: {
     m: () => (value) => ({

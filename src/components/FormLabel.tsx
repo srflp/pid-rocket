@@ -3,7 +3,7 @@ import { styled } from 'stitches.config';
 import { useFormControlContext } from './FormControl';
 
 const StyledLabel = styled('label', {
-  display: "block",
+  display: 'block',
   color: '$gray700',
   marginBottom: '5px',
 });
