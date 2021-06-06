@@ -3,6 +3,7 @@ import { createCss, StitchesCss } from '@stitches/react';
 const stitches = createCss({
   theme: {
     colors: {
+      main: "#6CCAFF",
       gray100: 'hsl(0 0% 98.8%)',
       gray200: 'hsl(0 0% 96.0%)',
       gray300: 'hsl(0 0% 93.7%)',

@@ -61,34 +61,34 @@ export default function ParametersForm({ setOptions, setResult }: Props): JSX.El
       <Flex css={{ gap: '10px' }}>
         <FormControl id="kP" isRequired>
           <FormLabel>kP</FormLabel>
-          <Input type="text" name="kP" placeholder="kP" ref={register} />
+          <Input type="text" placeholder="kP" {...register('kP', { required: true })} />
         </FormControl>
         <FormControl id="kI" isRequired>
           <FormLabel>kI</FormLabel>
-          <Input type="text" name="kI" placeholder="kI" ref={register} />
+          <Input type="text" placeholder="kI" {...register('kI', { required: true })} />
         </FormControl>
         <FormControl id="kD" isRequired>
           <FormLabel>kP</FormLabel>
-          <Input type="text" name="kD" placeholder="kD" ref={register} />
+          <Input type="text" placeholder="kD" {...register('kD', { required: true })} />
         </FormControl>
       </Flex>
       <Flex css={{ gap: '10px' }}>
         <FormControl id="timeStep" isRequired>
           <FormLabel>time step</FormLabel>
-          <Input type="text" name="timeStep" placeholder="[s]" ref={register} />
+          <Input type="text" placeholder="[s]" {...register('timeStep', { required: true })} />
         </FormControl>
         <FormControl id="simTime" isRequired>
           <FormLabel>simulation time</FormLabel>
-          <Input type="text" name="simTime" placeholder="[s]" ref={register} />
+          <Input type="text" placeholder="[s]" {...register('simTime', { required: true })} />
         </FormControl>
       </Flex>
       <FormControl id="maxThrust" isRequired>
         <FormLabel>max thrust</FormLabel>
-        <Input type="text" name="maxThrust" placeholder="[N]" ref={register} />
+        <Input type="text" placeholder="[N]" {...register('maxThrust', { required: true })} />
       </FormControl>
       <FormControl id="destination" isRequired>
         <FormLabel>destination height</FormLabel>
-        <Input type="text" name="destination" placeholder="[m]" ref={register} />
+        <Input type="text" placeholder="[m]" {...register('destination', { required: true })} />
       </FormControl>
 
       <Flex css={{ gap: '10px', marginTop: '8px' }}>

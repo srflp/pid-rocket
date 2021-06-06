@@ -1,6 +1,5 @@
-import { MAIN } from '../theme';
-import { Line } from 'react-chartjs-2';
 import React from 'react';
+import { Line } from 'react-chartjs-2';
 
 export interface ChartOptions {
   title: string;
@@ -10,6 +9,8 @@ export interface ChartOptions {
   dataY: number[];
 }
 
+const mainColor = '#6CCAFF';
+
 export default function Chart(options: ChartOptions) {
   const chartData = {
     labels: options.dataX,
@@ -18,8 +19,8 @@ export default function Chart(options: ChartOptions) {
         // label: 'height',
         data: options.dataY,
         fill: false,
-        borderColor: MAIN,
-        pointBackgroundColor: MAIN,
+        borderColor: mainColor,
+        pointBackgroundColor: mainColor,
       },
     ],
     responsive: true,
