@@ -1,8 +1,6 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { RegisterOptions, useForm } from 'react-hook-form';
 import { styled } from 'stitches.config';
-import * as yup from 'yup';
 import Simulation from '../computations/pid/Simulation';
 import {
   defaultOptions,
@@ -21,28 +19,19 @@ const StyledForm = styled('form', {
   'flex-direction': 'column',
 });
 
-const schema = yup
-  .object()
-  .shape({
-    kP: yup.number().required(),
-    kI: yup.number().required(),
-    kD: yup.number().required(),
-    timeStep: yup.number().required(),
-    simTime: yup.number().required(),
-    maxThrust: yup.number().required(),
-    destination: yup.number().required(),
-  })
-  .required();
-
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<SimulationOptions>>;
   setResult: React.Dispatch<React.SetStateAction<SimulationOutput | undefined>>;
 }
 
+const numberFieldOptions: RegisterOptions = {
+  required: true,
+  pattern: { value: /^\d+$/, message: 'Invalid number.' },
+};
+
 export default function ParametersForm({ setOptions, setResult }: Props): JSX.Element {
   const { register, setValue, handleSubmit } = useForm<SimulationOptions>({
     defaultValues: defaultOptions,
-    resolver: yupResolver(schema),
   });
 
   const onSubmit = (options: SimulationOptions) => {
@@ -61,34 +50,34 @@ export default function ParametersForm({ setOptions, setResult }: Props): JSX.El
       <Flex css={{ gap: '10px' }}>
         <FormControl id="kP" isRequired>
           <FormLabel>kP</FormLabel>
-          <Input type="text" placeholder="kP" {...register('kP', { required: true })} />
+          <Input type="text" placeholder="kP" {...register('kP', numberFieldOptions)} />
         </FormControl>
         <FormControl id="kI" isRequired>
           <FormLabel>kI</FormLabel>
-          <Input type="text" placeholder="kI" {...register('kI', { required: true })} />
+          <Input type="text" placeholder="kI" {...register('kI', numberFieldOptions)} />
         </FormControl>
         <FormControl id="kD" isRequired>
           <FormLabel>kP</FormLabel>
-          <Input type="text" placeholder="kD" {...register('kD', { required: true })} />
+          <Input type="text" placeholder="kD" {...register('kD', numberFieldOptions)} />
         </FormControl>
       </Flex>
       <Flex css={{ gap: '10px' }}>
         <FormControl id="timeStep" isRequired>
           <FormLabel>time step</FormLabel>
-          <Input type="text" placeholder="[s]" {...register('timeStep', { required: true })} />
+          <Input type="text" placeholder="[s]" {...register('timeStep', numberFieldOptions)} />
         </FormControl>
         <FormControl id="simTime" isRequired>
           <FormLabel>simulation time</FormLabel>
-          <Input type="text" placeholder="[s]" {...register('simTime', { required: true })} />
+          <Input type="text" placeholder="[s]" {...register('simTime', numberFieldOptions)} />
         </FormControl>
       </Flex>
       <FormControl id="maxThrust" isRequired>
         <FormLabel>max thrust</FormLabel>
-        <Input type="text" placeholder="[N]" {...register('maxThrust', { required: true })} />
+        <Input type="text" placeholder="[N]" {...register('maxThrust', numberFieldOptions)} />
       </FormControl>
       <FormControl id="destination" isRequired>
         <FormLabel>destination height</FormLabel>
-        <Input type="text" placeholder="[m]" {...register('destination', { required: true })} />
+        <Input type="text" placeholder="[m]" {...register('destination', numberFieldOptions)} />
       </FormControl>
 
       <Flex css={{ gap: '10px', marginTop: '8px' }}>
