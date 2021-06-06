@@ -2,10 +2,15 @@ import { forwardRef, PropsWithChildren } from 'react';
 import { styled } from 'stitches.config';
 import { useFormControlContext } from './FormControl';
 
+// TODO allow using custom styled elements as FormLabel with "as" prop
+
 const StyledLabel = styled('label', {
   display: 'block',
   color: '$gray700',
   marginBottom: '5px',
+  width: 'fit-content',
+  backdropFilter: 'blur(10px)',
+  borderRadius: '3px',
 });
 
 type FormLabelProps = {};

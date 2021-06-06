@@ -18,6 +18,7 @@ const StyledInput = styled(defaultTag, {
   fontSize: '18px',
   color: 'white',
   backgroundColor: 'rgba(256,256,256,0.05)',
+  backdropFilter: 'blur(5px)',
 });
 
 interface InputProps extends FormControlOptions {}

@@ -5,31 +5,32 @@ const Button = styled('button', {
   outline: 'none',
 
   fontSize: '16px',
-  borderRadius: '5px',
+  borderRadius: '10px',
   px: '20px',
   py: '16px',
   width: '100%',
   '&:hover': {
     backgroundColor: 'lightgray',
   },
-  '&:focus': {
-    boxShadow: '0 0 0 1px lightgray',
-  },
   variants: {
     variant: {
       primary: {
-        backgroundColor: '#6CCAFF',
-        color: 'black',
+        background: `#f8f8f8`,
+        boxShadow: `2px 2px 5px 1px #f8f8f878`,
         '&:hover': {
-          backgroundColor: '#63B9EB',
+          background: `#e8e8e8`,
         },
         '&:active': {
-          backgroundColor: '#58A5D1',
+          background: `linear-gradient(145deg, #d1d1d1, #f8f8f8)`,
         },
       },
       secondary: {
         color: '#eaeaea',
+        fontSize: '14px',
+        px: '4px',
+        py: '12px',
         backgroundColor: 'rgba(256,256,256,0.05)',
+        backdropFilter: 'blur(5px)',
         '&:hover': {
           backgroundColor: 'rgba(256,256,256,0.1)',
         },

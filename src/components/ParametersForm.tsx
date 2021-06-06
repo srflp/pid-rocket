@@ -80,7 +80,7 @@ export default function ParametersForm({ setOptions, setResult }: Props): JSX.El
         <Input type="text" placeholder="[m]" {...register('destination', numberFieldOptions)} />
       </FormControl>
 
-      <Flex css={{ gap: '10px', marginTop: '8px' }}>
+      <Flex css={{ gap: '10px', marginTop: '8px', alignItems: 'center' }}>
         <Button type="button" onClick={onReset}>
           back to defaults
         </Button>
