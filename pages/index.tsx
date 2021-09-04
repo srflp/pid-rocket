@@ -12,13 +12,21 @@ import {
 
 const Header = styled('header', {
   display: 'flex',
+  position: 'fixed',
   color: '#111',
   backgroundColor: 'white',
   padding: '5px',
+  top: 0,
+  height: '70px',
+  // width: '100%',
+  background: 'rgba(256,256,256,0.2)',
+  backdropFilter: 'blur(8px)',
+  borderBottomRightRadius: '15px',
 });
 
 const HeaderTitle = styled('h1', {
   ml: '16px',
+  mr: '16px',
   fontSize: '16pt',
 });
 
@@ -68,7 +76,7 @@ const BoxWhite = styled('section', {
   alignContent: 'center',
   background: '#fff',
   overflow: 'auto',
-  margin: '0 10px 0 50px',
+  margin: '70px 10px 0px 50px',
   transition: 'margin 200ms',
   minWidth: 0,
 });
@@ -96,7 +104,7 @@ const MainWrapper = styled('main', {
     transform: 'rotate(180deg)',
   },
   [`&[data-menu-opened] ${BoxWhite}`]: {
-    margin: '0 10px 0 405px',
+    marginLeft: '405px',
   },
 });
 

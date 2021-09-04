@@ -2,7 +2,6 @@ import { styled } from 'stitches.config';
 
 const Button = styled('button', {
   border: 'none',
-  outline: 'none',
 
   fontSize: '16px',
   borderRadius: '10px',
