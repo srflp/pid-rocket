@@ -1,11 +1,12 @@
 import { round } from 'lodash';
+import React from 'react';
 import { SimulationOptions, SimulationOutput } from 'src/computations/pid/typesAndDefaults';
 import { styled } from 'stitches.config';
 import Chart from './Chart';
 
 function getStabilityTime(result: SimulationOutput, destination: number) {
   let counter = 0;
-  for (let [i, height] of result.height.entries()) {
+  for (const [i, height] of result.height.entries()) {
     if (counter === 10) {
       return round(result.time[i - 10], 2).toFixed(2) + ' s';
     }
@@ -128,4 +129,4 @@ function Result({ result, options }: Props) {
   );
 }
 
-export default Result;
+export default React.memo(Result);

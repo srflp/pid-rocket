@@ -10,26 +10,6 @@ import {
   SimulationOutput,
 } from '../src/computations/pid/typesAndDefaults';
 
-const MainWrapper = styled('main', {
-  display: 'grid',
-  boxSizing: 'border-box',
-
-  width: 'auto',
-  height: 'auto',
-  gridTemplateColumns: 'auto',
-  gridTemplateAreas: `
-      'boxBlack'
-      'boxWhite'`,
-
-  '@md': {
-    width: '100%',
-    height: '100%',
-    gridTemplateColumns: '400px auto',
-    gridTemplateAreas: `
-      'boxBlack boxWhite'`,
-  },
-});
-
 const Header = styled('header', {
   display: 'flex',
   color: '#111',
@@ -43,13 +23,11 @@ const HeaderTitle = styled('h1', {
 });
 
 const BoxBlack = styled('section', {
-  // gridArea: 'boxBlack',
   position: 'fixed',
   top: '70px',
   bottom: 0,
   left: 0,
   width: '400px',
-  // backgroundColor: '#111',
   backgroundColor: '#e8e8e8',
   backgroundImage: 'url("bg.jpg")',
   backgroundSize: 'cover',
@@ -61,9 +39,6 @@ const BoxBlack = styled('section', {
 
   transform: 'translateX(-360px)',
   transition: '.25s ease-out',
-  '&[data-opened]': {
-    transform: 'translateX(0)',
-  },
 });
 
 const ToggleMenuButton = styled('button', {
@@ -84,9 +59,6 @@ const ToggleMenuButton = styled('button', {
     transform: 'rotate(0deg)',
     transition: '.3s ease-out',
   },
-  '*[data-opened] > & img': {
-    transform: 'rotate(180deg)',
-  },
 });
 
 const BoxWhite = styled('section', {
@@ -96,7 +68,36 @@ const BoxWhite = styled('section', {
   alignContent: 'center',
   background: '#fff',
   overflow: 'auto',
+  margin: '0 10px 0 50px',
+  transition: 'margin 200ms',
   minWidth: 0,
+});
+
+const MainWrapper = styled('main', {
+  // display: 'grid',
+  // boxSizing: 'border-box',
+  // width: 'auto',
+  // height: 'auto',
+  // gridTemplateColumns: 'auto',
+  // gridTemplateAreas: `
+  //     'boxBlack'
+  //     'boxWhite'`,
+  // '@md': {
+  //   width: '100%',
+  //   height: '100%',
+  //   gridTemplateColumns: '400px auto',
+  //   gridTemplateAreas: `
+  //     'boxBlack boxWhite'`,
+  // },
+  [`&[data-menu-opened] > ${BoxBlack}`]: {
+    transform: 'translateX(0)',
+  },
+  [`&[data-menu-opened] ${ToggleMenuButton} img`]: {
+    transform: 'rotate(180deg)',
+  },
+  [`&[data-menu-opened] ${BoxWhite}`]: {
+    margin: '0 10px 0 405px',
+  },
 });
 
 const Copyright = styled('div', {
@@ -126,8 +127,8 @@ export default function Index(): JSX.Element {
       <Header>
         <HeaderTitle>PID Rocket</HeaderTitle>
       </Header>
-      <MainWrapper>
-        <BoxBlack data-opened={menuOpened}>
+      <MainWrapper data-menu-opened={menuOpened}>
+        <BoxBlack>
           <h2 style={{ marginTop: '5px' }}>Simulation parameters</h2>
           <ParametersForm setResult={setResult} setOptions={setOptions} />
           <ToggleMenuButton onClick={toggleMenu}>
@@ -135,7 +136,7 @@ export default function Index(): JSX.Element {
           </ToggleMenuButton>
         </BoxBlack>
         <BoxWhite>
-          <Result result={result} options={options}></Result>
+          <Result result={result} options={options} />
         </BoxWhite>
         <Copyright>
           &copy; {new Date().getFullYear()} Filip Sauer, Karina Szubert, Konrad Szychowiak, Monika

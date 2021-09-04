@@ -26,7 +26,7 @@ interface Props {
 
 const numberFieldOptions: RegisterOptions = {
   required: true,
-  pattern: { value: /^\d+$/, message: 'Invalid number.' },
+  pattern: { value: /^(\d*\.\d+|\d+)$/, message: 'Invalid number.' },
 };
 
 export default function ParametersForm({ setOptions, setResult }: Props): JSX.Element {
