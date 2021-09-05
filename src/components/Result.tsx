@@ -23,7 +23,7 @@ const Table = styled('table', {
   display: 'block',
   overflowX: 'auto',
   whiteSpace: 'nowrap',
-  margin: '20px 0 40px',
+  marginTop: '20px',
   '& td, & th': {
     padding: '0 5px',
   },
@@ -32,6 +32,9 @@ const Table = styled('table', {
   },
   '& thead tr:first-child': {
     textAlign: 'center',
+  },
+  '@md': {
+    marginBottom: '40px',
   },
 });
 

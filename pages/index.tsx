@@ -12,16 +12,18 @@ import {
 
 const Header = styled('header', {
   display: 'flex',
-  position: 'fixed',
   color: '#111',
   backgroundColor: 'white',
   padding: '5px',
-  top: 0,
   height: '70px',
-  // width: '100%',
   background: 'rgba(256,256,256,0.2)',
   backdropFilter: 'blur(8px)',
   borderBottomRightRadius: '15px',
+
+  '@md': {
+    position: 'fixed',
+    top: 0,
+  },
 });
 
 const HeaderTitle = styled('h1', {
@@ -31,25 +33,30 @@ const HeaderTitle = styled('h1', {
 });
 
 const BoxBlack = styled('section', {
-  position: 'fixed',
-  top: '70px',
-  bottom: 0,
-  left: 0,
-  width: '400px',
+  width: '100%',
   backgroundColor: '#e8e8e8',
   backgroundImage: 'url("bg.jpg")',
   backgroundSize: 'cover',
   color: '#eaeaea',
   boxSizing: 'border-box',
-  padding: '40px 50px 40px 35px',
+  padding: '40px 35px 40px 35px',
   overflow: 'auto',
-  borderRadius: '0 15px 0 0',
 
-  transform: 'translateX(-360px)',
-  transition: '.25s ease-out',
+  '@md': {
+    transform: 'translateX(-360px)',
+    transition: '.25s ease-out',
+    paddingRight: '50px',
+    borderTopRightRadius: '15px',
+    width: '400px',
+    position: 'fixed',
+    top: '70px',
+    bottom: 0,
+    left: 0,
+  },
 });
 
 const ToggleMenuButton = styled('button', {
+  display: 'none',
   cursor: 'pointer',
   background: 'radial-gradient(farthest-side at right, rgba(255, 255, 255, 0.25), rgba(0,0,0,0) )',
   transition: 'opacity .15s ease-out',
@@ -67,6 +74,10 @@ const ToggleMenuButton = styled('button', {
     transform: 'rotate(0deg)',
     transition: '.3s ease-out',
   },
+
+  '@md': {
+    display: 'block',
+  },
 });
 
 const BoxWhite = styled('section', {
@@ -76,35 +87,25 @@ const BoxWhite = styled('section', {
   alignContent: 'center',
   background: '#fff',
   overflow: 'auto',
-  margin: '70px 10px 0px 50px',
   transition: 'margin 200ms',
   minWidth: 0,
+  margin: '10px 5px 0 5px',
+  '@md': {
+    margin: '70px 10px 0px 50px',
+  },
 });
 
 const MainWrapper = styled('main', {
-  // display: 'grid',
-  // boxSizing: 'border-box',
-  // width: 'auto',
-  // height: 'auto',
-  // gridTemplateColumns: 'auto',
-  // gridTemplateAreas: `
-  //     'boxBlack'
-  //     'boxWhite'`,
-  // '@md': {
-  //   width: '100%',
-  //   height: '100%',
-  //   gridTemplateColumns: '400px auto',
-  //   gridTemplateAreas: `
-  //     'boxBlack boxWhite'`,
-  // },
-  [`&[data-menu-opened] > ${BoxBlack}`]: {
-    transform: 'translateX(0)',
-  },
-  [`&[data-menu-opened] ${ToggleMenuButton} img`]: {
-    transform: 'rotate(180deg)',
-  },
-  [`&[data-menu-opened] ${BoxWhite}`]: {
-    marginLeft: '405px',
+  '@md': {
+    [`&[data-menu-opened] ${ToggleMenuButton} img`]: {
+      transform: 'rotate(180deg)',
+    },
+    [`&[data-menu-opened] > ${BoxBlack}`]: {
+      transform: 'translateX(0)',
+    },
+    [`&[data-menu-opened] ${BoxWhite}`]: {
+      marginLeft: '405px',
+    },
   },
 });
 
