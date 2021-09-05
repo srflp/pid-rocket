@@ -1,6 +1,6 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import { getCssString } from 'stitches.config';
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
+import { getCssText } from 'stitches.config';
 
 export const pathPrefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
@@ -34,7 +34,7 @@ export default class Document extends NextDocument {
             type="text/css"
             charSet="utf-8"
           />
-          <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssString() }} />
+          <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
         </Head>
         <body>
           <Main />
