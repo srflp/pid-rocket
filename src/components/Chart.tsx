@@ -73,7 +73,7 @@ export default function Chart(options: ChartOptions) {
 
   return (
     <div>
-      <Line type="line" data={chartData} options={chartOptions} />
+      <Line data={chartData} options={chartOptions} />
     </div>
   );
 }
