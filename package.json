@@ -10,7 +10,7 @@
     "export": "next export",
     "analyze": "ANALYZE=true next build",
     "as": "yarn analyze && hs .next/analyze/",
-    "lint": "eslint --ext .ts,.tsx",
+    "lint": "next lint",
     "clean-next": "rimraf .next",
     "clean-nm": "rimraf node_modules"
   },
@@ -35,6 +35,7 @@
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -50,7 +51,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx}": "yarn lint --fix",
     "*.{ts,tsx,css,md,json}": "prettier --write"
   }
 }
