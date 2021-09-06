@@ -11,7 +11,7 @@ export interface ChartOptions {
 
 const mainColor = '#6CCAFF';
 
-export default function Chart(options: ChartOptions) {
+export default function Chart(options: ChartOptions): JSX.Element {
   const chartData = {
     labels: options.dataX,
     datasets: [

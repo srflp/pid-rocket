@@ -141,7 +141,7 @@ export default function Index(): JSX.Element {
           <h2 style={{ marginTop: '5px' }}>Simulation parameters</h2>
           <ParametersForm setResult={setResult} setOptions={setOptions} />
           <ToggleMenuButton onClick={toggleMenu}>
-            <Image src="/chevron-right.svg" width="15" height="15" draggable={false} />
+            <Image src="/chevron-right.svg" width="15" height="15" draggable={false} alt="" />
           </ToggleMenuButton>
         </BoxBlack>
         <BoxWhite>

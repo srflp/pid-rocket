@@ -13,9 +13,9 @@ const StyledLabel = styled('label', {
   borderRadius: '3px',
 });
 
-type FormLabelProps = {};
+type FormLabelProps = Record<string, never>;
 
-function useFieldLabel(props: Record<string, any>) {
+function useFieldLabel(props: FormLabelProps) {
   const field = useFormControlContext();
 
   return {
@@ -37,3 +37,4 @@ export const FormLabel = forwardRef<HTMLLabelElement, PropsWithChildren<FormLabe
     );
   },
 );
+FormLabel.displayName = 'FormLabel';

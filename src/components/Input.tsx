@@ -21,7 +21,7 @@ const StyledInput = styled(defaultTag, {
   backdropFilter: 'blur(5px)',
 });
 
-interface InputProps extends FormControlOptions {}
+type InputProps = FormControlOptions;
 
 export const Input = forwardRef<
   HTMLInputElement,
@@ -31,3 +31,4 @@ export const Input = forwardRef<
 
   return <StyledInput ref={forwardedRef} {...inputProps} />;
 });
+Input.displayName = 'Input';

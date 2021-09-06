@@ -39,7 +39,7 @@ type ControlContext = Omit<ReturnType<typeof useFormControlProvider>, 'htmlProps
 
 const FormControlContext = createContext<ControlContext | undefined>(undefined);
 const FormControlProvider = FormControlContext.Provider;
-export function useFormControlContext() {
+export function useFormControlContext(): ControlContext | undefined {
   return React.useContext(FormControlContext);
 }
 
@@ -52,15 +52,18 @@ export const FormControl = forwardRef<HTMLDivElement, FormControlProps>((props, 
     </FormControlProvider>
   );
 });
+FormControl.displayName = 'FormControl';
 
-interface UseFormControlProps<T extends HTMLElement> extends FormControlOptions {
+interface UseFormControlProps extends FormControlOptions {
   id?: string;
   disabled?: boolean;
   readOnly?: boolean;
   required?: boolean;
 }
 
-export function useFormControl<T extends HTMLElement>(props: UseFormControlProps<T>) {
+export function useFormControl<T extends HTMLElement>(
+  props: UseFormControlProps,
+): UseFormControlProps & HTMLAttributes<T> {
   const field = useFormControlContext();
 
   const { isInvalid, isDisabled, isReadOnly, isRequired, ...rest } = props;
@@ -68,11 +71,11 @@ export function useFormControl<T extends HTMLElement>(props: UseFormControlProps
   return {
     ...rest,
     id: props.id ?? field?.id,
-    disabled: props.disabled || props.isDisabled || field?.isDisabled,
-    readOnly: props.readOnly || props.isReadOnly || field?.isReadOnly,
-    required: props.required || props.isRequired || field?.isRequired,
-    'aria-invalid': ariaAttr(props.isInvalid || field?.isInvalid),
-    'aria-required': ariaAttr(props.isRequired || field?.isRequired),
-    'aria-readonly': ariaAttr(props.isReadOnly || field?.isReadOnly),
+    disabled: props.disabled || isDisabled || field?.isDisabled,
+    readOnly: props.readOnly || isReadOnly || field?.isReadOnly,
+    required: props.required || isRequired || field?.isRequired,
+    'aria-invalid': ariaAttr(isInvalid || field?.isInvalid),
+    'aria-required': ariaAttr(isRequired || field?.isRequired),
+    'aria-readonly': ariaAttr(isReadOnly || field?.isReadOnly),
   };
 }

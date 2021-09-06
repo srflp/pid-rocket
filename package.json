@@ -51,7 +51,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "yarn lint --fix",
+    "*.{ts,tsx}": "yarn lint --fix .",
     "*.{ts,tsx,css,md,json}": "prettier --write"
   }
 }

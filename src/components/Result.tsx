@@ -128,7 +128,9 @@ function Result({ result, options }: Props) {
       </div>
     </>
   ) : (
-    <p style={{ marginLeft: '18px' }}>To start, fill in the parameters and click "run".</p>
+    <p style={{ marginLeft: '18px' }}>
+      To start, fill in the parameters and click &quot;run&quot;.
+    </p>
   );
 }
 
