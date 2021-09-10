@@ -10,7 +10,8 @@
     "export": "next export",
     "analyze": "ANALYZE=true next build",
     "as": "yarn analyze && hs .next/analyze/",
-    "lint": "next lint",
+    "lint": "next lint --fix",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "clean-next": "rimraf .next",
     "clean-nm": "rimraf node_modules"
   },
@@ -48,10 +49,6 @@
     "typescript": "^4.4.2"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": "yarn lint --fix .",
-    "*.{ts,tsx,css,md,json}": "prettier --write"
+    "pre-commit": "yarn lint-staged"
   }
 }

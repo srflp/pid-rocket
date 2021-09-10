@@ -13,7 +13,10 @@ const StyledLabel = styled('label', {
   borderRadius: '3px',
 });
 
-type FormLabelProps = Record<string, never>;
+type FormLabelProps = {
+  id?: string;
+  htmlFor?: string;
+};
 
 function useFieldLabel(props: FormLabelProps) {
   const field = useFormControlContext();
