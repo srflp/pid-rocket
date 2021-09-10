@@ -1,130 +1,157 @@
-import { round } from 'lodash';
-import React, { useState } from 'react';
 import Head from 'next/head';
-import styles from 'styles/Index.module.scss';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import Result from 'src/components/Result';
+import { styled } from 'stitches.config';
+import ParametersForm from '../src/components/ParametersForm';
 import {
   defaultOptions,
   SimulationOptions,
   SimulationOutput,
 } from '../src/computations/pid/typesAndDefaults';
-import ParametersForm from '../src/components/ParametersForm';
-import Chart from '../src/components/Chart';
 
-function getStabilityTime(result: SimulationOutput, destination: number) {
-  let counter = 0;
-  for (let [i, height] of result.height.entries()) {
-    if (counter === 10) {
-      return round(result.time[i - 10], 2).toFixed(2) + ' s';
-    }
-    if (round(height, 2) === destination) {
-      counter += 1;
-    } else {
-      counter = 0;
-    }
-  }
-  return 'stability not achieved during the simulation time';
-}
+const Header = styled('header', {
+  display: 'flex',
+  color: '#111',
+  backgroundColor: 'white',
+  padding: '5px',
+  height: '70px',
+  background: 'rgba(256,256,256,0.2)',
+  backdropFilter: 'blur(8px)',
+  borderBottomRightRadius: '15px',
+
+  '@md': {
+    position: 'fixed',
+    top: 0,
+  },
+});
+
+const HeaderTitle = styled('h1', {
+  ml: '16px',
+  mr: '16px',
+  fontSize: '16pt',
+});
+
+const BoxBlack = styled('section', {
+  width: '100%',
+  backgroundColor: '#e8e8e8',
+  backgroundImage: 'url("bg.jpg")',
+  backgroundSize: 'cover',
+  color: '#eaeaea',
+  boxSizing: 'border-box',
+  padding: '40px 35px 40px 35px',
+  overflow: 'auto',
+
+  '@md': {
+    transform: 'translateX(-360px)',
+    transition: '.25s ease-out',
+    paddingRight: '50px',
+    borderTopRightRadius: '15px',
+    width: '400px',
+    position: 'fixed',
+    top: '70px',
+    bottom: 0,
+    left: 0,
+  },
+});
+
+const ToggleMenuButton = styled('button', {
+  display: 'none',
+  cursor: 'pointer',
+  background: 'radial-gradient(farthest-side at right, rgba(255, 255, 255, 0.25), rgba(0,0,0,0) )',
+  transition: 'opacity .15s ease-out',
+  opacity: 0.7,
+  '&:hover': {
+    opacity: 1,
+  },
+  border: 'none',
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  height: '100%',
+  width: '40px',
+  '& img': {
+    transform: 'rotate(0deg)',
+    transition: '.3s ease-out',
+  },
+
+  '@md': {
+    display: 'block',
+  },
+});
+
+const BoxWhite = styled('section', {
+  gridArea: 'boxWhite',
+  display: 'flex',
+  flexDirection: 'column',
+  alignContent: 'center',
+  background: '#fff',
+  overflow: 'auto',
+  transition: 'margin 200ms',
+  minWidth: 0,
+  margin: '10px 5px 0 5px',
+  '@md': {
+    margin: '70px 10px 0px 50px',
+  },
+});
+
+const MainWrapper = styled('main', {
+  '@md': {
+    [`&[data-menu-opened] ${ToggleMenuButton} img`]: {
+      transform: 'rotate(180deg)',
+    },
+    [`&[data-menu-opened] > ${BoxBlack}`]: {
+      transform: 'translateX(0)',
+    },
+    [`&[data-menu-opened] ${BoxWhite}`]: {
+      marginLeft: '405px',
+    },
+  },
+});
+
+const Copyright = styled('div', {
+  right: 0,
+  bottom: 0,
+  backgroundColor: '#ffffff',
+  padding: '5px',
+  borderRadius: '5px 0 0 0',
+
+  position: 'relative',
+  '@md': {
+    position: 'fixed',
+  },
+});
 
 export default function Index(): JSX.Element {
   const [result, setResult] = useState<SimulationOutput>();
   const [options, setOptions] = useState<SimulationOptions>(defaultOptions);
+  const [menuOpened, setMenuOpened] = useState<true | undefined>(true);
+  const toggleMenu = () => setMenuOpened((v) => (v ? undefined : true));
 
   return (
     <>
       <Head>
         <title>PID Rocket</title>
       </Head>
-      <main className={styles.wrapper}>
-        <header className={styles.header}>
-          <h1 className={styles.headerTitle}>PID Rocket</h1>
-        </header>
-        <section className={styles.boxBlack}>
-          <h2>Simulation parameters</h2>
+      <Header>
+        <HeaderTitle>PID Rocket</HeaderTitle>
+      </Header>
+      <MainWrapper data-menu-opened={menuOpened}>
+        <BoxBlack>
+          <h2 style={{ marginTop: '5px' }}>Simulation parameters</h2>
           <ParametersForm setResult={setResult} setOptions={setOptions} />
-        </section>
-        <section className={styles.boxWhite}>
-          {result && options ? (
-            <>
-              <div className={styles.chartContainer}>
-                <Chart
-                  title="Rocket height in time - h(t)"
-                  labelX="t [s]"
-                  labelY="h [m]"
-                  dataX={result.time.map((el) => round(el, 3))}
-                  dataY={result.height.map((el) => round(el, 2))}
-                />
-                <Chart
-                  title="Rocket velocity in time - v(t)"
-                  labelX="t [s]"
-                  labelY="v [m/s]"
-                  dataX={result.time.map((el) => round(el, 3))}
-                  dataY={result.velocity.map((el) => round(el, 2))}
-                />
-                <Chart
-                  title="Rocket acceleration in time - a(t)"
-                  labelX="t [s]"
-                  labelY="a [m/s2]"
-                  dataX={result.time.map((el) => round(el, 3))}
-                  dataY={result.acceleration.map((el) => round(el, 2))}
-                />
-                <Chart
-                  title="Rocket thrust in time - F(t)"
-                  labelX="t [s]"
-                  labelY="F [N]"
-                  dataX={result.time.map((el) => round(el, 3))}
-                  dataY={result.thrust.map((el) => round(el, 2))}
-                />
-              </div>
-
-              <div>
-                <p style={{ marginLeft: '15px' }}>
-                  Max height achieved: {round(Math.max(...result.height), 2).toFixed(2) + ' m'}{' '}
-                  (should be: {round(options.destination, 2).toFixed(2) + ' m'})
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15px' }}>
-                  Time to rocket stability on destination height*:{' '}
-                  {getStabilityTime(result, options.destination)}
-                  <span style={{ fontSize: '11px', lineHeight: 'normal' }}>
-                    *time after which next 10 height measurements are equal to the destination
-                    height
-                  </span>
-                </div>
-
-                <table className={styles.resultsTable}>
-                  <thead>
-                    <tr>
-                      <th>n</th>
-                      <th>time [s]</th>
-                      <th>height [m]</th>
-                      <th>velocity [m/s]</th>
-                      <th>acceleration [m/s2]</th>
-                      <th>thrust [N]</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.from(Array(result.count).keys()).map((i) => (
-                      <tr key={result.time[i]}>
-                        <td>{i}</td>
-                        <td>{round(result.time[i], 2).toFixed(2)}</td>
-                        <td>{round(result.height[i], 2).toFixed(2)}</td>
-                        <td>{round(result.velocity[i], 2).toFixed(2)}</td>
-                        <td>{round(result.acceleration[i], 2).toFixed(2)}</td>
-                        <td>{round(result.thrust[i], 2).toFixed(2)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          ) : (
-            <p style={{ marginLeft: '18px' }}>To start, fill in the parameters and click "run".</p>
-          )}
-        </section>
-        <section className={styles.copyright}>
+          <ToggleMenuButton onClick={toggleMenu}>
+            <Image src="/chevron-right.svg" width="15" height="15" draggable={false} alt="" />
+          </ToggleMenuButton>
+        </BoxBlack>
+        <BoxWhite>
+          <Result result={result} options={options} />
+        </BoxWhite>
+        <Copyright>
           &copy; {new Date().getFullYear()} Filip Sauer, Karina Szubert, Konrad Szychowiak, Monika
           Zielińska
-        </section>
-      </main>
+        </Copyright>
+      </MainWrapper>
     </>
   );
 }

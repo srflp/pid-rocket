@@ -1,6 +1,9 @@
 module.exports = {
-  extends: ['prettier', 'prettier/@typescript-eslint'],
-  parserOptions: {
-    project: './tsconfig.json',
-  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'next/core-web-vitals',
+    'prettier',
+  ],
 };

@@ -1,6 +1,5 @@
-import { MAIN } from '../theme';
-import { Line } from 'react-chartjs-2';
 import React from 'react';
+import { Line } from 'react-chartjs-2';
 
 export interface ChartOptions {
   title: string;
@@ -10,7 +9,9 @@ export interface ChartOptions {
   dataY: number[];
 }
 
-export default function Chart(options: ChartOptions) {
+const mainColor = '#6CCAFF';
+
+export default function Chart(options: ChartOptions): JSX.Element {
   const chartData = {
     labels: options.dataX,
     datasets: [
@@ -18,8 +19,8 @@ export default function Chart(options: ChartOptions) {
         // label: 'height',
         data: options.dataY,
         fill: false,
-        borderColor: MAIN,
-        pointBackgroundColor: MAIN,
+        borderColor: mainColor,
+        pointBackgroundColor: mainColor,
       },
     ],
     responsive: true,
@@ -27,48 +28,46 @@ export default function Chart(options: ChartOptions) {
 
   const chartOptions = {
     scales: {
-      xAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: options.labelX,
-          },
-          ticks: {
-            autoSkip: true,
-            maxTicksLimit: 30,
-          },
+      x: {
+        title: {
+          display: true,
+          text: options.labelX,
         },
-      ],
-      yAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: options.labelY,
-          },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 30,
         },
-      ],
+      },
+      y: {
+        title: {
+          display: true,
+          text: options.labelY,
+        },
+      },
     },
-    title: {
-      display: true,
-      text: options.title,
-      fontSize: 16,
-    },
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      displayColors: false,
-      // callbacks: {
-      //   label: function (tooltipItem: any, data: any) {
-      //     var label = data.datasets[tooltipItem.datasetIndex].label || '';
-      //
-      //     if (label) {
-      //       label += ': ';
-      //     }
-      //     label += Math.round(tooltipItem.yLabel * 100) / 100;
-      //     return label;
-      //   },
-      // },
+    plugins: {
+      title: {
+        display: true,
+        text: options.title,
+        font: { size: 16 },
+      },
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        displayColors: false,
+        // callbacks: {
+        //   label: function (tooltipItem: any, data: any) {
+        //     var label = data.datasets[tooltipItem.datasetIndex].label || '';
+        //
+        //     if (label) {
+        //       label += ': ';
+        //     }
+        //     label += Math.round(tooltipItem.yLabel * 100) / 100;
+        //     return label;
+        //   },
+        // },
+      },
     },
   };
 

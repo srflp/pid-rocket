@@ -1,29 +1,47 @@
-import Document, { DocumentContext } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
+import { getCssText } from 'stitches.config';
 
-export default class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
+export const pathPrefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
+export default class Document extends NextDocument {
+  render(): JSX.Element {
+    return (
+      <Html>
+        <Head>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={`${pathPrefix}/apple-touch-icon.png`}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={`${pathPrefix}/favicon-32x32.png`}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={`${pathPrefix}/favicon-16x16.png`}
+          />
+          <link rel="manifest" href={`${pathPrefix}/site.webmanifest`} />
+          <link rel="shortcut icon" href={`${pathPrefix}/favicon.ico`} />
+          <link
+            rel="stylesheet"
+            href="https://indestructibletype.com/fonts/Jost.css"
+            type="text/css"
+            charSet="utf-8"
+          />
+          <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
